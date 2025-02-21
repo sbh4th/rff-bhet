@@ -1,0 +1,66 @@
+/*-- scss:defaults --*/
+
+// fonts
+$font-family-sans-serif: "Lucida Sans", serif !default;
+
+/*-- fonts --*/
+/*$presentation-heading-font: 'Bodoni Moda', serif;
+$mainFont: 'Bodoni Moda', serif;*/
+
+$theme-blue: #2a76dd;
+$theme-red: #ff0000;
+$theme-gray: #cccccc;
+$theme-white: #ffffff;
+$theme-orange: #f5bc6c;
+
+@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+
+$font-family: 'Allura', cursive;
+
+/*-- scss:rules --*/
+
+.blue {
+  color: $theme-blue;
+}
+
+.red {
+  color: $theme-red;
+}
+
+.orange {
+  color: $theme-orange;
+}
+
+.gray {
+  color: $theme-gray;
+}
+
+.white {
+  color: $theme-white;
+}
+
+.act {
+  font-family: Allura;
+  font-size: 300%;
+  color: $theme-white;
+}
+
+.reveal .slide aside .aside-footnotes {
+  margin-bottom: 1em;
+  font-size: 0.2em;
+}
+
+.reveal .aside {
+  margin-bottom: 5em;
+  font-size: 0.2em;
+}
+
+/* alignment */
+
+.h2center h2 {
+  text-align: center;
+}
+
+.center body {
+  text-align: center;
+}

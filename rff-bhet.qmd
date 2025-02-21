@@ -1,0 +1,989 @@
+---
+title: "Impacts of transitioning to clean household energy"
+subtitle: "Evidence from policy reform in peri-urban Beijing"
+author: "Sam Harper"
+date: 2025-02-24
+date-format: iso
+format: 
+  revealjs:
+    theme: [default, custom.scss]
+    css: fonts.css
+    width: 1600
+    height: 900
+    slide-number: true
+    html-math-method: mathjax
+    standalone: false
+    embed-resources: false
+    auto-stretch: false
+include-in-header: 
+  text: |
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+title-slide-attributes:
+    data-background-image: "images/mcgill-epi-logo.png"
+    data-background-size: 30%
+    data-background-position: 50% 90%
+execute: 
+  cache: false
+bibliography: rff-bhet.bib
+csl: elsevier-harvard-without-titles.csl
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+library(here)
+library(tidyverse)
+library(readxl)
+library(pdftools)
+library(modelsummary)
+library(tinytable)
+library(kableExtra)
+library(osfr)
+library(patchwork)
+
+# set theme for plots
+theme_asm <- function() {
+  theme_classic() + 
+    theme(axis.title = element_text(size=18),
+      axis.text = element_text(size = 18),
+      strip.background = element_blank(),
+      strip.text = element_text(size = 16),
+      axis.text.x = element_text(color="gray50"),
+      axis.title.x = element_text(color="gray50"),
+      axis.line.x = element_line(color="gray50"),
+      axis.line.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      plot.title = element_text(size = 18))
+}
+```
+
+# Background
+
+## 
+![](images/proj-bhet.png){.fragment .absolute top=75 left=900 width=700 height=800}
+
+## {.center background-image="images/sabrie-nyt-coal.png"} 
+
+:::{#title-slide .center}
+[**Impacts of a Clean Energy Transition Policy**]{.white .large}
+:::
+
+## Interdisciplinary Team {.smaller}
+
+::: columns
+::: {.column width="50%"}
+
+**McGill University** 
+
+- Sam Harper (Epidemiology)
+- Jill Baumgartner (Epidemiology)
+- Brian Robinson (Geography)
+- Chris Barrington-Leigh (Economics) 
+- Koren Mann (Toxicology)
+- Arijit Nandi (Epidemiology)
+- Robert Platt (Biostatistics)
+
+**Colorado State University**
+
+- Ellison Carter (Engineering)
+- Xiaoying Li (Engineering)
+
+**Chinese Academy of Sciences **  
+
+- Yuanxun Zhang (Air Chemistry)
+- Zhongjie Fan (Cardiology)
+
+:::
+
+::: {.column width="50%"}
+**Peking University**
+
+- Shu Tao (Environmental Science)
+- Yaojie Li (project coordinator)
+
+**China National Center for Cardiovascular Disease**     
+
+- Liancheng Zhao (CVD epidemiology)
+
+**Knowledge Users** 
+
+- Barry Jessiman (Health Canada)
+- Alison Dickson (Environ & Climate Change Canada) 
+- Iris Jin, Asia Pacific Foundation of Canada 
+- Richard Fuller, Pure Earth Foundation
+
+**Funders**
+
+- Canadian Institutes of Health Research
+- Health Effects Institute
+
+:::
+:::
+
+# Why Did We Start?
+
+## The role of coal in China
+
+::: columns
+::: {.column width="50%"}
+
+<center>
+~ 30% of global emissions
+</center>
+
+![](images/china-emissions.png){fig-align="center" width="78%"}
+:::
+
+
+::: {.column width="50%" .fragment}
+
+<center>
+Still dominated by coal
+</center>
+
+![](images/china-production.png){fig-align="center" width="75%"}
+:::
+:::
+
+::: aside
+Image credits: [The Economist](https://www.economist.com/china/2023/11/27/will-china-save-the-planet-or-destroy-it)
+:::
+
+## Residential coal burning in China
+
+::: columns
+::: {.column width="50%"}
+
+![](images/liu-2016-fig1.png){fig-align="center" width="100%"}
+
+- Residential coal burning makes a substantial contribution to emissions
+- Particularly in winter months
+
+:::
+
+::: {.column width="50%" .fragment}
+
+- Coal contains fluorine, arsenic, lead, selenium and mercury, which are not destroyed by combustion; 
+- Technical constraints make it difficult to burn coal cleanly in households; 
+
+![](images/coalstove-1.jpg){.absolute top=450 left=1000 width="200" height="300"}
+![](images/coalstove-2.jpg){.absolute top=450 left=1300 width="200" height="300"}
+
+
+:::
+:::
+
+::: aside
+@liu2016
+:::
+
+
+## Policy Context
+
+::: columns
+::: {.column width="50%"}
+
+- Beijing designated “coal restricted areas”
+
+- Government subsidized electric or gas-powered heat pumps (80% of $4,500 cost) 
+
+- 2017: required 1.5 million people to halt coal use (scaled to >2 million by ambitious local officials)
+
+- Stepped implementation from 2017-2021 in Beijing and northern China (63 million homes)
+:::
+
+::: {.column width="50%"}
+![](images/beijing-policy.png){fig-align="center" width="70%"}
+:::
+:::
+
+## "Coal to Clean Energy Program"
+
+- Village-level intervention.
+- Subsidized purchase of heat pump; electricity subsidized regionally.
+- Remove coal stoves.
+- Retrofit existing homes or build new homes in the village.
+
+![](images/transition-fig.png){fig-align="center" width="70%"}
+
+
+## {background-image="images/coal-coverage.png" background-size="contain"} 
+
+## Temperature, PM~2.5~, and blood pressure
+
+::: columns
+::: {.column width="50%"}
+
+![](images/lewington-2012.png){width="80%"}
+:::
+
+::: {.column width="50%"}
+
+![](images/baumgartner-2011.png){width="75%"}
+
+:::
+:::
+
+::: aside
+Images: @lewington2012, @baumgartner2011. Also see @sternbach2022
+:::
+
+
+## Research Gaps {background-image="images/lai-2024-title.png" background-size="40%" background-position="top 20% left 90%"}
+
+- Most prior work only on cookstoves
+
+- Several RCTs
+
+- Mixed evidence on air pollution
+
+- Challenges with uptake 
+
+- Multiple sources (e.g., stove-stacking)
+
+- Unclear whether possible to scale-up
+
+- Weaker and mixed evidence on health impacts, even when HAP reduced
+
+
+
+> Household energy solutions need to go beyond cooking interventions alone; there are multiple sources that contribute to HAP
+
+::: aside
+@lai2024
+:::
+
+## Overall Study Objectives
+
+<br>
+
+:::: {.columns}
+
+::: {.column width="20%"}
+
+:::
+
+::: {.column width="75%"}
+
+### Aim 1. `r emo::ji("point_left")`
+
+Estimate the total effect of the intervention.
+
+### Aim 2. `r emo::ji("cross_mark")` 
+
+Estimate the contribution of changes in the chemical composition of $PM_{2.5}$ to the overall effect on health outcomes.
+
+### Aim 3. `r emo::ji("point_left")`
+
+Examine alternative [pathways and mechanisms]{.blue} that may contribute to the intervention’s impact.
+:::
+
+::::
+
+# What Did We Do?
+
+## Village sampling
+
+::: columns
+::: {.column width="25%"}
+
+- Identified 50 villages not yet exposed to policy 
+
+- Randomly selected ~20 homes in each village
+
+- Enrolled 1 individual per home
+
+:::
+
+::: {.column width="75%"}
+
+![](images/village-map.png){fig-align="center" width="80%"}
+
+:::
+:::
+
+## Timing of study village treatment by the policy
+
+![](images/rollout.png){fig-align="center" width="80%"}
+
+## Data Collection Overview
+
+:::{.r-stack}
+![](images/data-collection-flow.png){fig-align="center" width="80%"}
+
+![](images/Participation-flowchart-Apr12.png){.fragment .absolute top=400 left=-60}
+:::
+
+
+## Measurements {.smaller background-image="images/measurement-pics.png" background-size="35%" background-position="top 20% left 90%"}
+
+::: columns
+::: {.column width="60%"}
+
+**Village**
+
+- Outdoor air pollution (1-2 months per season)
+- Information on village policies/programs
+
+**Household** 
+
+- Questionnaire to assess energy patterns and related expenditures
+- Indoor air temperature (~75% of homes for 2+ winter months)
+- Electricity use based on meters
+
+**Individual**
+
+- Questionnaires on health status, behaviors, conditions, and medication use
+- Exposures to PM~2.5~ and black carbon (50% of participants) 
+- Health measurements (BP, self-reported respiratory symptoms, blood inflammatory and oxidative stress markers (~75%), grip strength (~75%), airway inflammation via exhaled NO (~25%)
+
+:::
+
+::: {.column width="40%"}
+:::
+:::
+
+
+## Blood pressure measurement
+::: columns
+::: {.column width="60%"}
+
+- Automated oscillometric device. 
+- Calibrated by manufacturer before Years 1 and 4.
+
+<br>
+
+- Home BP measurement by trained staff.
+- Measured blood pressure 3 to 5 times on participants supported right arm, after 5 mins of quiet, seated rest.
+- Mean of final 2 measurements used in analysis.
+
+:::
+::: {.column width="40%"}
+
+![](images/bp-monitor.jpg){fig-align="center" width="40%"}
+
+![](images/bp-measurement.png){fig-align="center" width="40%"}
+:::
+:::
+
+## Indoor temperature {background-image="images/indoor-temp.png" background-size="70%" background-position="top 85% left 95%"}
+
+- Measured indoor temperature in the 5-min before BP.
+- Long-term measurement in a subsample of households with sensor taped to household wall.
+- Thermochron iButton or LabJack Digit-THL sensors.
+- Interior wall of most commonly used room.
+- 1.5m height (~ participant height).
+- Measured 5-12 months
+- 125-min sampling interval.
+
+## Indoor air pollution (PM~2.5~)
+
+::: columns
+::: {.column width="70%"}
+**1. Long-term measurement with real-time sensors.**
+
+- 6 households per village.
+- Run with standard measurements (BAM/TOEM) pre- and post-data collection, each year.
+- Measured 5-mo., 1-min sampling interval
+
+**2. 24h measurement with filter-based instrument.**
+
+- 3 households per village.
+- Accepted (gold-standard) measurement.
+- Used to calibrate real-time measurements.
+
+:::
+
+::: {.column width="30%"}
+![](images/ipm-sensor.png){fig-align="center" width="80%"}
+![](images/ipm-charging.jpg){fig-align="center" width="80%"}
+:::
+:::
+
+
+## Basic idea for mediation study
+
+<br>
+
+To understand the pathways, mechanisms, and intermediates through which a treatment affects an outcome.
+
+<br>
+
+. . . 
+
+:::: {.columns}
+
+::: {.column width="20%"}
+
+:::
+
+::: {.column width="75%"}
+
+### How much of the policy effect is through:
+- Reduced exposure to PM~2.5~
+- Other pathways (indoor temperature, behavioral changes)
+- Consider multiple mediators
+:::
+
+::::
+
+## First part of mediation: total effect
+
+<br>
+
+:::: {.columns}
+
+::: {.column width="25%"}
+
+<br>
+
+Step 1: Estimate the total effect of $T$.
+
+:::
+
+::: {.column width="75%"}
+
+<br><br>
+
+![](images/dag-te.png){fig-align="center" width="100%"}
+
+:::
+
+::::
+
+## Second part of mediation: decomposition
+
+Basic idea: understand pathways of effects 
+
+:::: {.columns}
+
+::: {.column width="25%"}
+
+<br>
+
+Step 2: Estimate how much of the total effect is due to PM~2.5~ vs. other pathways?
+
+:::
+
+::: {.column width="75%"}
+
+![](images/dag-cde-simple.png){fig-align="center" width="100%"}
+
+:::
+
+::::
+
+## Second part of mediation: decomposition
+
+Basic idea: understand pathways of effects 
+
+:::: {.columns}
+
+::: {.column width="25%"}
+
+<br>
+
+Step 2: Estimate how much of the total effect is due to PM~2.5~ vs. other pathways?
+
+:::
+
+::: {.column width="75%"}
+
+![](images/cde-dag.png){fig-align="center" width="100%"}
+
+
+:::
+
+::::
+
+## Quantities of interest {background-image="images/dag-te-shown.png" background-size="30%" background-position="top 1% left 98%"}
+
+<br>
+
+Total effect:
+$${E[Y|T,X]=\beta_{0}+\beta_{1}T +\beta_{2}X}$$
+
+This equation estimates the total effect of the ban:
+$$\color{blue}{TE=\beta_{1}(T^{*}-T)}$$
+where $T^{*}$ is exposure to ban and $T$ is no exposure.
+
+## Mediation model {background-image="images/dag-cde-shown.png" background-size="30%" background-position="top 1% left 98%"}
+
+Estimate two regressions:
+
+1. Treatment on mediator:  
+
+$$\color{red}{E[M|T,X]=\beta_{0}+\beta_{1}T +\beta_{2}X}$$
+
+. . . 
+
+2. Treatment and mediator on outcome:  
+
+$$E[Y|T,X,M] = \theta_{0} + \theta_{1}T + \theta_{2}M + \theta_{3}TM + \theta_{4}X + \theta_{5}W$$
+
+
+Second equation estimates the "Controlled Direct Effect":
+$$\color{violet}{CDE=\theta_{1}+\theta_{3}TM}$$
+
+::: aside
+See @vanderweele2015. Other quantities include the "Natural Direct Effect" ($\theta_{1} + \theta_{3}(\beta_{0} + \beta_{1} + \beta_{2})$) and the "Natural Indirect Effect" ($\theta_{2}\beta_{1} + \theta_{3}\beta_{1}$)]
+:::
+
+## What the hell is the CDE?
+<br>
+
+### Interpretation
+
+*This effect is the contrast between the counterfactual outcome if the individual were exposed at $T=t$ and the counterfactual outcome if the same individual were exposed at* $T=t*$, *with the mediator set to a fixed level* $M=m$.
+
+::: {.fragment}
+
+<br>
+
+### English:
+
+*"How much would blood pressure change if the policy were implemented and we held $PM_{2.5}$ fixed at* $m$ *?"*
+
+:::
+
+## Key assumptions {background-image="images/dag-assumptions.png" background-size="50%" background-position="top 20% left 90%"}
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+<br>
+<br>
+
+Assumptions for valid CDE:
+
+- No confounding of the total effect.
+- No confounding of the mediator-outcome effect.
+
+:::
+
+::: {.column width="60%"}
+
+:::
+
+::::
+
+## Basic Design: Difference-in-Differences
+
+<br>
+
+::: columns
+::: {.column width="30%"}
+
+Need a *counterfactual* for treated group.
+
+<br>
+
+Challenges:
+
+- Group differences
+
+- Time trends
+
+- Time-varying confounders
+
+- [Staggered implementation]{.red}
+:::
+
+::: {.column width="70%"}
+
+![](images/didfig.png){fig-align="center" width="80%"}
+:::
+:::
+
+## Challenges with staggered adoption
+
+::: columns
+::: {.column width="30%"}
+
+- Using earlier treated groups as controls only 'works' under homogeneity.
+
+- Early treatment effects get subtracted from the DD estimate.
+
+- Generates poor summary estimate if there is heterogeneity.
+:::
+
+::: {.column width="70%"}
+![](images/baker-f1.png){fig-align="center" width="80%"}
+:::
+:::
+
+::: aside
+Image: [Andrew Baker](https://andrewcbaker.netlify.app/2019/09/25/difference-in-differences-methodology/). See also @goodman-bacon2021, @callaway2021a, @sun2021
+:::
+
+## Key Assumption: Parallel Trends
+:::: columns
+::: {.column width="30%"}
+
+![](images/gertler-parallel.png){fig-align="center" width="120%"}
+
+:::
+
+:::{.column width="70%"}
+-   Basic DD controls for any time invariant characteristics of both treated and control groups.
+
+-   Does not control for any **time-varying** characteristics.
+
+-   If another policy/intervention occurs in the treated (or control) group at the same time as the intervention, we cannot cleanly identify the effect of the program.
+
+-   DD main assumption: in the absence of the intervention treated and control groups would have displayed similar **trends**.
+    
+- This is called the *parallel trends* assumption.
+:::
+::::
+
+:::aside
+Impossible to verify, see @gertler2016.
+:::
+
+## Statistical model {background-image="images/dag-te-shown.png" background-size="30%" background-position="top 1% left 98%"}
+
+Total effect via "extended" two-way fixed effects:
+$$Y_{ijt}= \alpha + \sum_{r=q}^{T} \beta_{r} d_{r} + \sum_{s=r}^{T} \gamma_{s} fs_{t}+ \sum_{r=q}^{T} \sum_{s=r}^{T} \tau_{rs} (d_{r} \times fs_{t}) + \mathbf{Z}_{ijt} + \varepsilon_{ijt}$$
+$X$ includes:
+
+- $d_{r}$ = treatment cohort fixed effects  
+- $fs_{t}$ = time fixed effects  
+- $\mathbf{Z}_{ijt}$ = time-varying covariates
+
+TE is average of marginal *ATT*s $\color{blue}\tau_{rs}$, averaged over cohort and time.
+
+::: aside
+See @wooldridge2021, @goin2023
+:::
+
+# What Did We Find?
+
+## Treatment groups were generally balanced
+
+```{r, echo=F, message=F, warning=F}
+bt <- readRDS(here("data-clean", 
+  "t_balance.rds"))
+
+knitr::kable(bt@table_dataframe) |>
+  kable_styling(bootstrap_options = c("striped", "hover", 
+    "condensed", "responsive"), full_width = F, font_size=30) %>%
+  column_spec(1, width_min = '5in') %>%
+  add_header_above(c(" " = 1, "Never treated (N=603)" = 2, 
+                     "Ever treated (N=400)" = 2, " " = 2))
+```
+
+## Treated households adopted cleaner energy
+
+![](images/sankey-w2.png){fig-align="center" width="60%"}
+
+## Treated households adopted cleaner energy
+
+[*At the time of treatment*]{.large}
+
+![](images/sanky.jpg)
+
+## Treated households reported less coal use
+<br>
+
+![](images/coal-plot.png){fig-align="center"}
+
+## 
+
+:::{#title-slide .center}
+[**Did the policy affect outcomes?**]{.blue .large}
+:::
+
+<br>
+
+![](images/dag-te-shown.png){fig-align="center" width="70%"}
+
+## Evidence of parallel pre-trends for BP
+
+<br>
+
+![](images/bp-pretrends.png){fig-align="center"}
+
+## Impact on blood pressure {background-image="images/dag-te-shown.png" background-size="15%" background-position="top 1% left 98%"}
+
+::: columns
+::: {.column width="95%"}
+
+```{r, echo=F, message=F, warning=F, out.width="100%", fig.align="center"}
+bp <- read_xlsx(here("data-clean",
+  "overall_effects-table-2024Mar26.xlsx")) %>% 
+  mutate(order = row_number(),
+   model = rep(c("Total Effect", 
+     "Adjusted Total Effect"), each = 8)) %>%
+  select(order, bp, type, theta_bar, 
+         lower_95CI, upper_95CI, model) %>%
+  filter(order %in% c(1,3,9,11))
+
+ggplot(bp, 
+  aes(x = theta_bar, y = model)) + 
+  geom_point() + 
+  geom_errorbarh(aes(xmin = lower_95CI, 
+    xmax = upper_95CI), height=0.1) + 
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  labs(y = " ", x = "Total Effect (mmHg)") +
+  scale_x_continuous(limits = c(-4, 4)) +
+  facet_wrap(vars(bp), ncol=2) +
+  theme_asm() +
+  theme(axis.text.y = element_text(margin = margin(0,20,0,0)),
+        panel.spacing = unit(2, "lines"))
+```
+
+:::
+
+::: {.column width="5%"}
+
+:::
+:::
+
+
+::: aside
+Time-varying covariates: age, sex, waist circumference, smoking, alcohol consumption, and use of blood pressure medication.
+:::
+
+## Some evidence of heterogeneity
+
+![](images/bp-het.png)
+
+##
+
+::: columns
+::: {.column width="20%"}
+
+Reductions in some self-reported respiratory symptoms.
+
+<br>
+
+Little evidence of impact on inflammatory markers.
+
+:::
+
+::: {.column width="80%"}
+
+```{r, echo=F, message=F, warning=F}
+op <- read_rds(here("data-clean", 
+  "op-table.rds")) %>%
+  filter(category %in% c("Self-reported (pp)",
+    "Measured", "Outdoor")) %>%
+  select(-estimate_1, -ci_1)
+  
+colnames(op) <- c(" ", " ", "Obs", "ATT", "(95% CI)")
+
+tt(op) %>%
+  group_tt(
+    i = list("Respiratory outcomes" = 1,
+             "Inflammatory markers" = 8)) %>%
+  style_tt(i = c(1, 9), align = "l", bold=T) %>%
+  style_tt(
+    i = 2, j = 1, rowspan = 6, alignv = "t") %>%
+  style_tt(
+    i = 10, j = 1, rowspan = 4, alignv = "t") %>%
+  style_tt(j=1:5, fontsize = 0.8) %>%
+  format_tt(j=4, sprintf = "%.1f") 
+```
+
+:::
+:::
+
+## 
+
+:::{#title-slide .center}
+[**Did the policy affect the mediators?**]{.blue .large}
+:::
+<br>
+
+![](images/dag-t-on-m.png){fig-align="center" width="70%"}
+
+
+## Policy reduced (only) indoor PM {background-image="images/dag-t-on-m.png" background-size="15%" background-position="top 1% left 98%"}
+
+::: columns
+::: {.column width="95%"}
+
+```{r, echo=F, message=F, warning=F, out.width="100%", fig.align="center"}
+apt <- read_rds(here("data-clean", 
+  "ap-etwfe-table.rds")) %>%
+  select(category, outcome, estimate_2, ci_2) %>%
+    mutate(
+    # Extract lower bound
+    ci_lower = as.double(str_extract(ci_2, "(?<=\\().+?(?=,)")),         
+    # Extract upper bound
+    ci_upper = as.double(str_extract(ci_2, "(?<=, ).+?(?=\\))")))
+
+ggplot(apt, 
+  aes(x = estimate_2, y = outcome)) + 
+  geom_point() + 
+  geom_errorbarh(aes(xmin = ci_lower, 
+    xmax = ci_upper), height=0.2) + 
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  labs(y = " ", x = bquote('Total Effect'~(µg/m^3))) +
+  scale_x_continuous(limits = c(-50, 20)) +
+  facet_wrap(vars(category), nrow=3, scales="free") +
+  theme_asm() +
+  theme(axis.text.y = element_text(margin = margin(0,20,0,0)))
+```
+
+:::
+
+::: {.column width="5%"}
+
+:::
+:::
+
+::: aside
+ETWFE models adjusted for household size, smoking, outdoor temperature, and outdoor dewpoint.
+:::
+
+## Policy increased indoor temperature {background-image="images/dag-t-on-m.png" background-size="15%" background-position="top 1% left 98%"}
+```{r, echo=F, message=F, warning=F, out.width="90%"}
+stemp_table <- read_xlsx(here("data-clean",
+  "marginal_temp_results.xlsx")) %>%
+  mutate(
+    # Extract mean
+    estimate = as.double(str_extract(att, "^[^\\(]+")),                 # Extract lower bound
+    ci_lower = as.double(str_extract(att, "(?<=\\().+?(?=,)")),         # Extract upper bound
+    ci_upper = as.double(str_extract(att, "(?<=, ).+?(?=\\))")),
+    # rename model for reshape
+    model = case_when(
+      `Covariate adjustment` == "DiD" ~ 1,
+      `Covariate adjustment` != "DiD" ~ 2,),
+    n = rep(c(2:7, 1), each=2),
+    label = fct_reorder(`Outcome metric`, desc(n))) %>%
+  filter(model == 2)
+
+ggplot(stemp_table, 
+  aes(x = estimate, y = label)) + 
+  geom_point() + 
+  geom_errorbar(aes(xmin = ci_lower, 
+    xmax = ci_upper), width=0.2) + 
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  labs(y = " ", x = "Total Effect (°C)") +
+  scale_x_continuous(limits = c(-1, 6.1)) +
+  theme_asm()
+```
+
+
+::: aside
+ETWFE models adjusted for the number of rooms and wintertime occupants in the household, age of the primary respondent, and wealth index.
+:::
+
+##
+:::{#title-slide .center}
+[**Do PM~2.5~ and temperature mediate the BP effect?**]{.blue .large}
+:::
+
+<br>
+
+![](images/dag-cde-shown.png){fig-align="center" width="70%"}
+
+## BP mostly mediated by PM~2.5~ and temp {background-image="images/dag-cde-shown.png" background-size="15%" background-position="top 1% left 98%"}
+
+```{r, echo=F, message=F, warning=F, out.width="90%"}
+cdes <- read_rds(here("data-clean", "cde-bp.rds"))
+  
+p_te <- ggplot(subset(cdes, m == "Adjusted Total Effect"), 
+  aes(x = theta_bar, y = label)) + 
+  geom_point() + 
+  geom_errorbar(aes(xmin = lower_95CI, 
+    xmax = upper_95CI), width=0.2) + 
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  facet_wrap(vars(bp)) + labs(y = " ", x = "Total Effect (mmHg)") +
+  scale_x_continuous(limits = c(-3.5, 2.6)) +
+  theme_asm()
+
+p_cde <- ggplot(subset(cdes, m != "Adjusted Total Effect"), 
+  aes(x = theta_bar, y = label)) + 
+  geom_point() + 
+  geom_errorbar(aes(xmin = lower_95CI, 
+    xmax = upper_95CI), width=0.2) + 
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  facet_wrap(vars(bp)) + labs(y = " ") +
+  theme(plot.title = element_text(hjust =-0.6)) +
+  scale_x_continuous(limits = c(-3.5, 2.6)) +
+  xlab("Controlled Direct Effect (mmHg)") + 
+  theme_asm()
+
+p_te / p_cde + plot_layout(heights = c(1, 2))
+```
+::: aside
+ETWFE model with exposure-mediator interaction, adjusted for time-varying covariates.
+:::
+
+## Little mediation for respiratory symptoms
+
+```{r, echo=F, message=F, warning=F, out.width="90%"}
+cde_resp <- read_rds(here("data-clean",
+  "resp-cdes.rds")) %>%
+  filter(outcome=="Any symptom") %>%
+  rename(est0 = est, ci0 = ci) %>%
+  pivot_longer(!outcome,
+    cols_vary = "slowest", 
+    names_to = c(".value", "model"),
+    names_pattern = "([A-Za-z]+)(\\d+)") %>%
+  mutate(
+    # Extract lower bound
+    ci_lower = as.double(str_extract(ci, "(?<=\\().+?(?=,)")),         
+    # Extract upper bound
+    ci_upper = as.double(str_extract(ci, "(?<=, ).+?(?=\\))")),
+    model = factor(model, labels = c("Adjusted Total Effect", 
+    "Mediator: Indoor PM", "Mediator: Indoor Temperature",
+    "Mediator: Indoor PM & Temp")),
+    model = fct_reorder(model, desc(model)))
+
+ggplot(cde_resp, 
+  aes(x = est, y = model)) + 
+  geom_point() + 
+  geom_errorbarh(aes(xmin = ci_lower, 
+    xmax = ci_upper), height=0.2) + 
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  labs(y = " ", x = "Total Effect (pp)") +
+  scale_x_continuous(limits = c(-25, 5)) +
+  theme_asm() +
+  theme(axis.text.y = element_text(margin = margin(0,20,0,0)))
+```
+
+# What Does It Mean?
+
+## Uptake
+
+- High uptake and consistent use of the new heat pump technology.
+- Persistent effects for early treated villages.
+- Large reductions in coal use in treated villages.
+
+![](images/transition-fig.png){fig-align="center" width="70%"}
+
+## Impacts
+
+### Air pollution
+ - Impacts on indoor PM~2.5~ but not personal exposures or outdoor PM~2.5~
+ - Secular trends affected by large-scale policy changes
+ - Movement between indoor and outdoor
+
+### Health outcomes
+ - Overall lower BP, some evidence of heterogeneity
+ - Improvements in respiratory symptoms
+ - BP impacts largely mediated by PM~2.5~ and temperature
+ 
+## Limitations
+
+- However, capital costs of heat pumps are 2–7 times (5–18 times) higher than gas (clean coal) heaters at present, making them unaffordable for many households
+
+::: aside
+@zhou2022
+:::
+
+## {.center background-image="images/mcgill-university.jpg"}
+
+:::{#title-slide .center}
+### [Questions?]{.white} 
+[sam.harper@mcgill.ca]{.white}  
+[samharper.org]{.white}
+
+:::
+
+## References
+
+
