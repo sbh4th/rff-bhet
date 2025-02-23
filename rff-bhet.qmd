@@ -631,7 +631,7 @@ To understand the pathways, mechanisms, and intermediates through which a treatm
 
 <br>
 
-Step 1: Estimate the total effect of $T$.
+Step 1: Estimate the total effect of CHP ($T$) on BP.
 
 :::
 
@@ -655,7 +655,7 @@ Basic idea: understand pathways of effects
 
 <br>
 
-Step 2: Estimate how much of the total effect is due to PM~2.5~ vs. other pathways?
+Step 2: Estimate how much of the total effect is due to PM~2.5~, temperature vs. other pathways?
 
 :::
 
