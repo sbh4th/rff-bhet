@@ -60,7 +60,7 @@ theme_asm <- function() {
 
 <br>
 
-### Impact of transitioning to clean heating in China on:
+### Impact of transitioning to clean heating in rural China on:
 
  1) Community and personal air pollution exposure;
 
@@ -177,7 +177,7 @@ Source: World Health Organization - Global Health Observatory (2024) – process
 Source [US Environmental Protection Agency](https://www.epa.gov/pm-pollution/particulate-matter-pm-basics)
 :::
 
-##
+## {visibility="hidden"}
 
 ::: {style="text-align: center;"}
 Population-weighted average level of exposure to PM~2.5~
@@ -389,7 +389,6 @@ Images: @fan2019, @baumgartner2011.
 
 - Multiple sources (e.g., stove-stacking)
 
-- Unclear whether possible to scale-up
 
 - Weak evidence on health impacts, even when household PM reduced
 
