@@ -196,13 +196,6 @@
     "text": "Quantities of interest\n\nTotal effect: \\[{E[Y|T,X]=\\beta_{0}+\\beta_{1}T +\\beta_{2}X}\\]\n\nThe estimated total effect,\nwhere \\(T^{*}\\) is exposure to ban and \\(T\\) is no exposure: \\[\\color{blue}{TE=\\beta_{1}(T^{*}-T)}\\]"
   },
   {
-    "objectID": "rff-bhet.html#quantities-of-interest-1",
-    "href": "rff-bhet.html#quantities-of-interest-1",
-    "title": "Impacts of transitioning to clean household energy",
-    "section": "Quantities of interest",
-    "text": "Quantities of interest\n\n\n\nTotal effect:\n\nEstimate of total effect\nwhere \\(T^{*}\\) is exposure to ban and \\(T\\) is no exposure:\n\n\\[{E[Y|T,X]=\\beta_{0}+\\beta_{1}T +\\beta_{2}X}\\]\n\n\\[\\color{blue}{TE=\\beta_{1}(T^{*}-T)}\\]"
-  },
-  {
     "objectID": "rff-bhet.html#mediation-model",
     "href": "rff-bhet.html#mediation-model",
     "title": "Impacts of transitioning to clean household energy",

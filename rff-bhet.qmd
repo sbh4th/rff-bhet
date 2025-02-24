@@ -728,33 +728,6 @@ The estimated total effect,
 where $T^{*}$ is exposure to ban and $T$ is no exposure: 
 $$\color{blue}{TE=\beta_{1}(T^{*}-T)}$$
 
-## Quantities of interest {background-image="images/dag-te-shown.png" background-size="30%" background-position="top 1% left 98%"}
-
-<br>
-
-:::: columns
-
-::: {.column width="40%"}
-Total effect:
-
-<br>
-
-Estimate of total effect  
-
-where $T^{*}$ is exposure to ban and $T$ is no exposure:
-:::
-
-::: {.column width="60%"}
-$${E[Y|T,X]=\beta_{0}+\beta_{1}T +\beta_{2}X}$$
-
-<br>
-
-$$\color{blue}{TE=\beta_{1}(T^{*}-T)}$$
-
-:::
-
-::::
-
 
 ## Mediation model {background-image="images/dag-cde-shown.png" background-size="30%" background-position="top 1% left 98%"}
 
