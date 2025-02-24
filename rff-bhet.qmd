@@ -1153,7 +1153,9 @@ ETWFE model adjusted for time-varying covariates. Mediators set to untreated bas
  - Some evidence of cohort heterogeneity
  - BP impacts largely mediated by PM~2.5~ and temperature
  
-## Limitations and Extensions
+## 
+
+### Imporant limitations
 
 - No pre-trends for earliest treated group.
 
@@ -1161,7 +1163,9 @@ ETWFE model adjusted for time-varying covariates. Mediators set to untreated bas
 
 - Strong assumptions required for mediated effects.
 
-- Sustainability: heat pumps remain 5–18 times higher than gas (clean coal) heaters at present, making them unaffordable for many households.
+### Going forward
+
+- Sustainability: heat pumps remain 5–18 times higher than clean heaters at present, making them unaffordable for many households.
 
 - More work on income and well-being impacts.
 
